@@ -27,7 +27,7 @@ public EntityJava getEmployeeWithId(@PathVariable Integer empId)
 {
 	for(EntityJava val:list)
 	{
-		if(val.getEmpId()==empId)
+		if(val.getEmpId() == empId)
 		{
 			return val;
 		}
