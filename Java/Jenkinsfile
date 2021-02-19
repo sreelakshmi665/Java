@@ -10,15 +10,11 @@ pipeline{
             stage('Git-Checkout')
             {
               steps{
+                    sh 'rm -rf Java'
                      git 'https://github.com/sreelakshmi665/Java.git'
                 }
             }
-             stage('Clean')
-        {
-            steps{
-              sh 'mvn -f Java clean'
-            }
-        }
+    
              stage('Validate')
         {
             steps{
