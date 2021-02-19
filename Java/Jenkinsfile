@@ -15,43 +15,44 @@ pipeline{
              stage('Clean')
         {
             steps{
-              bat 'mvn -f Java clean'
+              sh 'mvn -f Java clean'
             }
         }
              stage('Validate')
         {
             steps{
-              bat 'mvn -f Java validate'
+              sh 'mvn -f Java validate'
             }
         }
         stage('Compile')
         {
             steps{
-               bat 'mvn -f Java compile'
+               sh 'mvn -f Java compile'
             }
         }
+            
         stage('Test')
         {
             steps{
-                bat 'mvn -f Java test'
+                sh 'mvn -f Java test'
             }
         }
         stage('Package')
         {
             steps{
-               bat 'mvn -f Java package'
+               sh 'mvn -f Java package'
             }
         }
         stage('Verify')
         {
             steps{
-               bat 'mvn -f Java verify'
+               sh 'mvn -f Java verify'
             }
         }
         stage('Install')
         {
             steps{
-                bat 'mvn -f Java install'
+                sh 'mvn -f Java install'
             }
         }
             
