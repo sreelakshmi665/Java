@@ -1,0 +1,71 @@
+pipeline{
+    agent any
+    tools{
+    maven 'Maven'
+    jdk 'jdk'
+    }
+        
+        stages{
+            stage('Git-Checkout')
+            {
+              steps{
+                     git 'https://github.com/sreelakshmi665/SonarQube'
+                }
+            }
+             stage('Clean')
+        {
+            steps{
+              bat 'mvn -f SonarQubePipeLine clean'
+            }
+        }
+             stage('Validate')
+        {
+            steps{
+              bat 'mvn -f SonarQubePipeLine validate'
+            }
+        }
+        stage('Compile')
+        {
+            steps{
+               bat 'mvn -f SonarQubePipeLine compile'
+            }
+        }
+             stage('Sonar Analysis'){
+            steps{
+                withSonarQubeEnv('sonar-server'){
+                    withMaven(maven:'Maven'){
+                        bat 'mvn -f SonarQubePipeLine sonar:sonar'
+                    }
+                }
+            }
+
+        }
+        stage('Test')
+        {
+            steps{
+                bat 'mvn -f SonarQubePipeLine test'
+            }
+        }
+        stage('Package')
+        {
+            steps{
+               bat 'mvn -f SonarQubePipeLine package'
+            }
+        }
+        stage('Verify')
+        {
+            steps{
+               bat 'mvn -f SonarQubePipeLine verify'
+            }
+        }
+        stage('Install')
+        {
+            steps{
+                bat 'mvn -f SonarQubePipeLine install'
+            }
+        }
+            
+            
+           
+        }
+}
