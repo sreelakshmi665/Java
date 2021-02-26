@@ -69,6 +69,36 @@ pipeline{
                 sh 'mvn -f Java install'
             }
         }
+             stage('Artifactory')
+    {
+      steps{
+           script{
+                        
+        archiveArtifacts artifacts:'Java/target/*.jar',followSymlinks:false
+           }
+      }
+    }
+        
+    stage('Deploy-To-Artifactory')
+    {
+      steps{
+           script{
+                       
+        rtUpload(
+          serverId:'artifactory-server',
+          spec: '''{
+          "files": [
+            {
+              "pattern": "Java/target/*.jar",
+              "target": "art-doc-dev-loc"
+            }
+         ]
+    }''',
+          
+)
+  }
+}   
+    } 
             
             
            
