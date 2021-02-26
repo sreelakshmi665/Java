@@ -27,6 +27,18 @@ pipeline{
                sh 'mvn -f Java compile'
             }
         }
+            stage('sonar analysis'){
+            steps{
+                 script{      
+                withSonarQubeEnv('sonar-server'){
+                    
+                        sh 'mvn -f MavenJUnitTest sonar:sonar'
+                    
+                    }
+                }
+            }
+
+        }
             
         stage('Test')
         {
