@@ -93,7 +93,7 @@ pipeline{
                 }
             }
         }
-             stage('Artifactory')
+      stage('Artifactory')
     {
       steps{
            script{
@@ -103,7 +103,6 @@ pipeline{
            }
       }
       }
-    }
         
     stage('Deploy-To-Artifactory')
     {
@@ -145,9 +144,9 @@ stage('Download-To-Artifactory')
 )
   }
 }   
-    }}   
+    }   
 
-            
+}          
      post {  
          always {  
              echo 'This will always run'  
