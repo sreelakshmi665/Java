@@ -70,7 +70,7 @@ pipeline{
             steps{
                 script{
                         FAILED_STAGE=env.STAGE_NAME
-               sh 'mvn -f Java package'
+                    sh 'mvn -f Java package -Dbuild.number=-${BUILD_NUMBER}'
                 }
             }
         }
